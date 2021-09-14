@@ -7,6 +7,9 @@ Some resources to get you started.
 
 - Install RStudio Desktop: https://rstudio.com/products/rstudio/#rstudio-desktop
 
+- Install basic libraries for later:
+_install.packages("tidyverse")
+
 - You've already found https://github.com but you'll need an account.
 
 - Install git on your machine
