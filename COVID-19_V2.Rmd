@@ -55,6 +55,7 @@ library(ggpubr)
 
 Canadian.data <- read_csv("https://health-infobase.canada.ca/src/data/covidLive/covid19.csv") %>% 
                  mutate(date = as_date(date, format = "%d-%m-%y"))
+# %y assumes 2 digit year, %Y assumes 4 digit year
 ```
 
 > Summary
@@ -70,16 +71,16 @@ Consider the number of case types in a province over the past few months
 
 ```{r stacked barplot, cache = TRUE, warning = FALSE}
 location ="Ontario"
-Canadian.data %>% subset(prname == location) %>%
+Canadian.data |> subset(prname == location) |>
   select(date,numrecoveredtoday,numdeathstoday,numactive)%>%
   rename(recovered.today=numrecoveredtoday,deaths.today=numdeathstoday,active=numactive)%>%
   gather(key = casetype, value = "cases",-date) %>%
+  
 ggplot( ) +
   geom_line(aes(x = date, y=cases,colour=casetype)) +
-  scale_x_date(date_labels = "%d/%m", date_breaks = "2 weeks") +
-  ggtitle(paste0("Daily Cases in ",location))
+  scale_x_date(date_labels = "%d/%m", date_breaks = "2 weeks") +  # set x axis label
+  ggtitle(paste0("Daily Cases in ",location))  # on the topleft
   
-
 
 Canadian.data %>% subset(prname == location) %>%
   select(date,
